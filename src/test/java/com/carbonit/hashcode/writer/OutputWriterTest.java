@@ -30,7 +30,7 @@ public class OutputWriterTest {
 		                  .addConnectedCell(cell3)
 		                  .addRouter(router1)
 		                  .addRouter(router2)
-		                  .write();
+		                  .write("result.out");
 
 		List<String> result = Files.lines(Paths.get(uri))
 		                            .collect(Collectors.toList());

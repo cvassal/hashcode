@@ -30,7 +30,7 @@ public class OutputWriter {
 		return this;
 	}
 
-	public void write() {
+	public void write(String fileName) {
 		List<String> resultFileAsList = new ArrayList<>();
 
 		resultFileAsList.add(String.valueOf(connectedCellsCoordinate.size()));
@@ -46,7 +46,7 @@ public class OutputWriter {
 		try {
 			URI uri = this.getClass()
 			              .getClassLoader()
-			              .getResource("output/result.out")
+			              .getResource("output/" + fileName)
 			              .toURI();
 			Files.write(Paths.get(uri), resultFileAsList, StandardOpenOption.CREATE);
 		} catch (IOException e) {
