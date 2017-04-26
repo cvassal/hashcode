@@ -1,5 +1,6 @@
 package com.carbonit.hashcode.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ public class Wireless {
     private Cell t[][];
     public final RouterRange routerRange;
     public final Building building;
+    private List<Position> routers;
 
     public Wireless(int rows, int columns, RouterRange routerRange, Building building) {
         this.routerRange = routerRange;
@@ -18,6 +20,7 @@ public class Wireless {
         this.t = new Cell[rows][columns];
         this.rows = rows;
         this.columns = columns;
+        this.routers = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -26,7 +29,7 @@ public class Wireless {
         }
     }
 
-    private Wireless(int rows, int columns, RouterRange routerRange, Building building, Cell[][] newCellMap) {
+    private Wireless(int rows, int columns, RouterRange routerRange, Building building, Cell[][] newCellMap, List<Position> routers) {
         this(rows, columns, routerRange, building);
         this.t = newCellMap;
         for (int i = 0; i < building.rows; i++) {
@@ -36,6 +39,7 @@ public class Wireless {
                 }
             }
         }
+        this.routers = routers;
     }
 
     public Position firstTarget() {
@@ -52,7 +56,8 @@ public class Wireless {
     public Wireless set(int row, int column, Cell toAdd) {
         this.t[row][column] = toAdd;
         if(toAdd == Cell.R) {
-            return new Wireless(this.rows, this.columns, this.routerRange, this.building, expandRouterRange(row, column));
+            routers.add(new Position(row, column));
+            return new Wireless(this.rows, this.columns, this.routerRange, this.building, expandRouterRange(row, column), routers);
         }
         return this;
     }
@@ -62,7 +67,7 @@ public class Wireless {
     }
 
 
-    public void connectRouter(Position router, Position backbone) {
+    private void connectRouter(Position router, Position backbone) {
         int x0 = router.column;
         int y0 = router.row;
         int x1 = backbone.column;
@@ -72,15 +77,16 @@ public class Wireless {
         int err = (dx>dy ? dx : -dy)/2;
 
             while (true) {
-                t[y0][x0] = Cell.C;
                 if (x0 == x1 && y0 == y1) break;
+                if (!(x0 == router.column && y0 == router.row))
+                    t[y0][x0] = Cell.C;
                 int e2 = err;
                 if (e2 > -dx) { err -= dy; x0 += sx; }
                 if (e2 < dy) { err += dx; y0 += sy; }
             }
     }
 
-    public void connectRouters(List<Position> routers, Position backbone) {
+    public void connectRouters(Position backbone) {
         routers.forEach(router -> connectRouter(router, backbone));
     }
 
@@ -103,9 +109,9 @@ public class Wireless {
 
         //Skipping the router row, which has been already processed
         int downRange = 1;
-        for(int position = row + 1; position <= newCellBoard.length; position++) {
-            if(newCellBoard[position][column] != null && downRange <= this.routerRange.getRange() && this.building.at(position, column) != Cell.W) {
-                newCellBoard = goLeftAndRight(position, column, newCellBoard);
+        for(int r = row + 1; r <= newCellBoard.length; r++) {
+            if (r < rows && column < columns && downRange <= this.routerRange.getRange() && this.building.at(r, column) != Cell.W) {
+                newCellBoard = goLeftAndRight(r, column, newCellBoard);
                 downRange += 1;
             }
             else {

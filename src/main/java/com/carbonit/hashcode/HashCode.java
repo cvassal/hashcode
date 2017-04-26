@@ -25,8 +25,11 @@ public class HashCode {
                     case T:
                         System.out.printf(".");
                         break;
-                    case TC:
+                    case C:
                         System.out.printf("C");
+                        break;
+                    case TC:
+                        System.out.printf("o");
                         break;
                     case R:
                         System.out.printf("R");
@@ -60,6 +63,15 @@ public class HashCode {
 
         Wireless wireless = input.wireless;
         Building building = input.building;
+
+        wireless.set(5,6, Cell.R);
+
+        wireless.set(3,15, Cell.R);
+
+
+        HashCode.print(building, wireless);
+
+        wireless.connectRouters(input.backbone.position);
 
         HashCode.print(building, wireless);
 

@@ -6,11 +6,12 @@ public class Backbone {
 
     private final int row;
     private final int column;
-
+    public final Position position;
 
     public Backbone(int row, int column) {
         this.row = row;
         this.column = column;
+        this.position = new Position(row, column);
     }
 
     public int getRow() {
