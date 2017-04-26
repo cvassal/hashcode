@@ -67,5 +67,6 @@ public class HashCode {
     public static void main(String... args) throws URISyntaxException, IOException {
         Input input = InputReader.read(HashCode.class.getClassLoader().getResource("inputs/charleston_road.in").toURI());
         Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange);
+        HashCode.print(input.building, result);
     }
 }

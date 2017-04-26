@@ -13,7 +13,7 @@ public class FonctionCalcul {
 
         for (int i = 0; i <= range.getRange(); i++) {
             for (int j = 0; j <= range.getRange(); j++) {
-                if (map.at(routerInitiale.row, routerInitiale.column).equals(Cell.W)) {
+                if (map.building.at(routerInitiale.row + i, routerInitiale.column + j).equals(Cell.W)) {
                     return routeurPosition;
                 } else {
                     routeurPosition = new Position(routerInitiale.row + i, routerInitiale.column + j);
@@ -24,16 +24,17 @@ public class FonctionCalcul {
     }
 
     public static Wireless putRouter(Wireless map, int budget, Price price, RouterRange radius) {
-        System.out.println(budget);
-        HashCode.print(map.building, map);
+        //System.out.println(budget);
+        //HashCode.print(map.building, map);
         if (budget <= price.getRouter()) {
             return map;
         }
 
         Position position = map.firstTarget();
-        System.out.println(position);
+        if (position == null) return map;
+        //System.out.println(position);
         Position routerPlacement = findRouterPlacement(map, position, radius);
-        System.out.println(routerPlacement);
+        //System.out.println(routerPlacement);
         Wireless newMap = map.set(routerPlacement.row, routerPlacement.column, Cell.R);
         int newBudget = budget - price.getRouter();
 
