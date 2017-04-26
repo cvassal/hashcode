@@ -148,29 +148,6 @@ public class Wireless {
         return newCellBoard;
     }
 
-    public void print() {
-        for (Cell[] aT : this.t) {
-            for (Cell anAT : aT) {
-                if(anAT != null) {
-                    switch (anAT) {
-                        case T:
-                            System.out.printf(".");
-                            break;
-                        case TC:
-                            System.out.printf("$");
-                            break;
-                        case R:
-                            System.out.printf("R");
-                            break;
-                    }
-                }
-                else {
-                    System.out.printf("-");
-                }
-            }
-            System.out.println();
-        }
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

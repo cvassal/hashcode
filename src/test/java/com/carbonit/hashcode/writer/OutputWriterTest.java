@@ -1,8 +1,8 @@
 package com.carbonit.hashcode.writer;
 
-import org.assertj.core.api.Assertions;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
+
+import com.carbonit.hashcode.domain.Position;
 import org.junit.Test;
 
 import java.net.URI;
@@ -15,19 +15,19 @@ public class OutputWriterTest {
 
 	@Test
 	public void should_write_3_cells_and_2_routers() throws Exception {
-		Coordinate cell1 = new Coordinate(1, 2);
-		Coordinate cell2 = new Coordinate(2, 3);
-		Coordinate cell3 = new Coordinate(3, 9);
-		Coordinate router1 = new Coordinate(3, 4);
-		Coordinate router2 = new Coordinate(4, 9);
+		Position cell1 = new Position(1, 2);
+		Position cell2 = new Position(2, 3);
+		Position cell3 = new Position(3, 9);
+		Position router1 = new Position(3, 4);
+		Position router2 = new Position(4, 9);
 		URI uri = this.getClass()
 		              .getClassLoader()
 		              .getResource("output/result.out")
 		              .toURI();
 
-		new OutputWriter().addConnectedCell(cell1)
-		                  .addConnectedCell(cell2)
-		                  .addConnectedCell(cell3)
+		new OutputWriter().addCable(cell1)
+		                  .addCable(cell2)
+		                  .addCable(cell3)
 		                  .addRouter(router1)
 		                  .addRouter(router2)
 		                  .write("result.out");

@@ -1,5 +1,7 @@
 package com.carbonit.hashcode.writer;
 
+import com.carbonit.hashcode.domain.Position;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,35 +14,35 @@ import java.util.stream.Collectors;
 
 public class OutputWriter {
 
-	private List<Coordinate> connectedCellsCoordinate;
-	private List<Coordinate> routersCoordinate;
+	private List<Position> cables;
+	private List<Position> routers;
 
 	public OutputWriter() {
-		connectedCellsCoordinate = new ArrayList<>();
-		routersCoordinate = new ArrayList<>();
+		cables = new ArrayList<>();
+		routers = new ArrayList<>();
 	}
 
-	public OutputWriter addConnectedCell(Coordinate connectedCell) {
-		connectedCellsCoordinate.add(connectedCell);
+	public OutputWriter addCable(Position cable) {
+		cables.add(cable);
 		return this;
 	}
 
-	public OutputWriter addRouter(Coordinate router) {
-		routersCoordinate.add(router);
+	public OutputWriter addRouter(Position router) {
+		routers.add(router);
 		return this;
 	}
 
 	public void write(String fileName) {
 		List<String> resultFileAsList = new ArrayList<>();
 
-		resultFileAsList.add(String.valueOf(connectedCellsCoordinate.size()));
-		resultFileAsList.addAll(connectedCellsCoordinate.stream()
-		                                                .map(Coordinate::toString)
+		resultFileAsList.add(String.valueOf(cables.size()));
+		resultFileAsList.addAll(cables.stream()
+		                                                .map(Position::toString)
 		                                                .collect(Collectors.toList()));
 
-		resultFileAsList.add(String.valueOf(routersCoordinate.size()));
-		resultFileAsList.addAll(routersCoordinate.stream()
-		                                                .map(Coordinate::toString)
+		resultFileAsList.add(String.valueOf(routers.size()));
+		resultFileAsList.addAll(routers.stream()
+		                                                .map(Position::toString)
 		                                                .collect(Collectors.toList()));
 
 		try {
@@ -49,9 +51,7 @@ public class OutputWriter {
 			              .getResource("output/" + fileName)
 			              .toURI();
 			Files.write(Paths.get(uri), resultFileAsList, StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
