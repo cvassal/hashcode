@@ -27,7 +27,7 @@ public class Building {
     }
 
     public Cell at(Position position) {
-        return this.t[position.rows][position.columns];
+        return this.t[position.row][position.column];
     }
 
     public Cell at(int row, int column) {

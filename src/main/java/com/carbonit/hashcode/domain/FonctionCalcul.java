@@ -14,7 +14,7 @@ public class FonctionCalcul {
                 if (building.at(routerInitiale).equals(Cell.W)) {
                     return routerInitiale;
                 } else {
-                    routeurPosition = new Position(routerInitiale.rows + i, routerInitiale.columns + j);
+                    routeurPosition = new Position(routerInitiale.row + i, routerInitiale.column + j);
                 }
             }
         }
