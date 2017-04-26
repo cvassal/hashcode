@@ -11,7 +11,7 @@ public class FonctionCalcul {
 
         for (int i = 0; i <= range.getRange(); i++) {
             for (int j = 0; j <= range.getRange(); j++) {
-                if (building.getBuilding(routerInitiale).equals(Cell.W)) {
+                if (building.at(routerInitiale).equals(Cell.W)) {
                     return routerInitiale;
                 } else {
                     routeurPosition = new Position(routerInitiale.rows + i, routerInitiale.columns + j);
