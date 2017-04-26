@@ -1,10 +1,10 @@
 package com.carbonit.hashcode.domain;
 
-public class Buiding {
+public class Building {
 
     public final Cell t[][];
 
-    public Buiding(int w, int h) {
+    public Building(int w, int h) {
         t = new Cell[w][h];
     }
 
