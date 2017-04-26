@@ -4,8 +4,8 @@ public class Wireless {
 
     public final Cell t[][];
 
-    public Wireless(int w, int h) {
-        t = new Cell[w][h];
+    public Wireless(int rows, int columns) {
+        t = new Cell[rows][columns];
     }
 
 }
