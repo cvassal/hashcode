@@ -24,7 +24,7 @@ public class InputReader {
             int columns = parseInt(v[1]);
             input.building = new Building(rows, columns);
             input.routerRange = new RouterRange(parseInt(v[2]));
-            input.wireless = new Wireless(rows, columns, input.routerRange);
+            input.wireless = new Wireless(rows, columns, input.routerRange, input.building);
         });
 
         Files.lines(path).skip(1).limit(1).forEach(s -> {
