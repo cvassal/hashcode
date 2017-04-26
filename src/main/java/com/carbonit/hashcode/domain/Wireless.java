@@ -1,6 +1,7 @@
 package com.carbonit.hashcode.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Wireless {
@@ -58,6 +59,29 @@ public class Wireless {
 
     public Cell at(int row, int column) {
         return this.t[row][column];
+    }
+
+
+    public void connectRouter(Position router, Position backbone) {
+        int x0 = router.column;
+        int y0 = router.row;
+        int x1 = backbone.column;
+        int y1 = backbone.row;
+        int dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+        int dy = Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+        int err = (dx>dy ? dx : -dy)/2;
+
+            while (true) {
+                t[y0][x0] = Cell.C;
+                if (x0 == x1 && y0 == y1) break;
+                int e2 = err;
+                if (e2 > -dx) { err -= dy; x0 += sx; }
+                if (e2 < dy) { err += dx; y0 += sy; }
+            }
+    }
+
+    public void connectRouters(List<Position> routers, Position backbone) {
+        routers.forEach(router -> connectRouter(router, backbone));
     }
 
     private Cell[][] expandRouterRange(int row, int column) {
