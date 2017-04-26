@@ -32,6 +32,29 @@ public class Wireless {
         return this.t[row][column];
     }
 
+
+    public void connectRouter(int row, int column, Position backbonePos) {
+        int x0 = 0;
+        int y0 = 0;
+        int x1 = 0;
+        int y1 = 0;
+        float dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+        float dy = Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+        float err = (dx>dy ? dx : -dy)/2;
+
+            while (true) {
+                t[y0][x0] = Cell.C;
+                if (x0 == x1 && y0 == y1) break;
+                float e2 = err;
+                if (e2 > -dx) { err -= dy; x0 += sx; }
+                if (e2 < dy) { err += dx; y0 += sy; }
+            }
+    }
+
+    public void connectRouters(Position backbonePos) {
+
+    }
+
     public void print() {
         for (Cell[] aT : this.t) {
             for (Cell anAT : aT) {
