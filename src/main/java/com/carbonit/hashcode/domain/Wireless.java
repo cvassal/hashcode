@@ -1,13 +1,20 @@
 package com.carbonit.hashcode.domain;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Wireless {
 
+    public final int rows;
+    public final int columns;
     public final Cell t[][];
     public final RouterRange routerRange;
 
     public Wireless(int rows, int columns, RouterRange routerRange) {
         this.routerRange = routerRange;
         t = new Cell[rows][columns];
+        this.rows = rows;
+        this.columns = columns;
     }
 
     public Wireless at(int row, int column, Cell toAdd) {
@@ -34,5 +41,28 @@ public class Wireless {
             }
             System.out.println();
         }
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Wireless wireless = (Wireless) o;
+        return rows == wireless.rows &&
+                columns == wireless.columns &&
+                Arrays.equals(t, wireless.t);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rows, columns, t);
+    }
+
+    @Override
+    public String toString() {
+        return "Wireless{" +
+                "rows=" + rows +
+                ", columns=" + columns +
+                ", t=" + Arrays.toString(t) +
+                '}';
     }
 }
