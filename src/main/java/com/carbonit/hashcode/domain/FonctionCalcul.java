@@ -26,7 +26,7 @@ public class FonctionCalcul {
     public static Wireless putRouter(Wireless map, int budget, Price price, RouterRange radius) {
         //System.out.println(budget);
         //HashCode.print(map.building, map);
-        if (budget <= price.getRouter()) {
+        if (budget <= price.getRouter() * 9 / 10) {
             return map;
         }
 

@@ -1,15 +1,12 @@
 package com.carbonit.hashcode;
 
-import com.carbonit.hashcode.domain.FonctionCalcul;
-import com.carbonit.hashcode.domain.Wireless;
+import com.carbonit.hashcode.domain.*;
 import com.carbonit.hashcode.reader.Input;
 import com.carbonit.hashcode.reader.InputReader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.carbonit.hashcode.domain.Building;
-import com.carbonit.hashcode.domain.Cell;
 import com.carbonit.hashcode.domain.Wireless;
 import com.carbonit.hashcode.reader.Input;
 import com.carbonit.hashcode.reader.InputReader;
@@ -18,6 +15,7 @@ import com.carbonit.hashcode.writer.OutputWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
 
@@ -25,7 +23,7 @@ public class HashCode {
 
 
 
-    public static void print(Building building, Wireless wireless) {
+    public static void print(Building building, Wireless wireless, OutputWriter outputWriter) {
         for (int i = 0; i < wireless.rows; i++) {
             for (int j = 0; j < wireless.columns; j++) {
                 Cell cell = wireless.at(i, j);
@@ -35,12 +33,15 @@ public class HashCode {
                         break;
                     case C:
                         System.out.printf("C");
+                        outputWriter.addCable(new Position(i,j));
                         break;
                     case TC:
                         System.out.printf("o");
                         break;
                     case R:
                         System.out.printf("R");
+                        outputWriter.addCable(new Position(i,j));
+                        outputWriter.addRouter(new Position(i,j));
                         break;
                     case B:
                         System.out.printf("B");
@@ -65,8 +66,18 @@ public class HashCode {
     }
 
     public static void main(String... args) throws URISyntaxException, IOException {
-        Input input = InputReader.read(HashCode.class.getClassLoader().getResource("inputs/charleston_road.in").toURI());
-        Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange);
-        HashCode.print(input.building, result);
+        final Stream<String> stream = Stream.of("sample", "charleston_road", "opera", "rue_de_londres");
+        stream.forEach(name -> {
+            try {
+                OutputWriter outputWriter = new OutputWriter();
+                Input input = InputReader.read(HashCode.class.getClassLoader().getResource("inputs/"+name+".in").toURI());
+                Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange);
+                result.connectRouters(input.backbone.position);
+                HashCode.print(input.building, result, outputWriter);
+                outputWriter.write(name + ".out");
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

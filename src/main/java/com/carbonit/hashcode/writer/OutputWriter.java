@@ -38,7 +38,7 @@ public class OutputWriter {
 		resultFileAsList.add(String.valueOf(cables.size()));
 		resultFileAsList.addAll(cables.stream()
 		                                                .map(Position::toString)
-		                                                .collect(Collectors.toList()));
+		                                                .collect(Collectors.toSet()));
 
 		resultFileAsList.add(String.valueOf(routers.size()));
 		resultFileAsList.addAll(routers.stream()
