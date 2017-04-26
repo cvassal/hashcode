@@ -47,5 +47,12 @@ public class ScoreServiceTest {
 		assertThat(actual).isEqualTo(new BigDecimal(1065610));
 	}
 
+	@Test
+	public void should_score_from_pdf_example() throws Exception {
+		Price price = new Price(1, 100, 220);
 
+		BigDecimal actual = scoreService.computeScore(price, 3, 2, 35);
+
+		assertThat(actual).isEqualTo(new BigDecimal(35017));
+	}
 }
