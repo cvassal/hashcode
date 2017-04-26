@@ -1,5 +1,13 @@
 package com.carbonit.hashcode;
 
+import com.carbonit.hashcode.domain.FonctionCalcul;
+import com.carbonit.hashcode.domain.Wireless;
+import com.carbonit.hashcode.reader.Input;
+import com.carbonit.hashcode.reader.InputReader;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import com.carbonit.hashcode.domain.Building;
 import com.carbonit.hashcode.domain.Cell;
 import com.carbonit.hashcode.domain.Wireless;
@@ -57,25 +65,7 @@ public class HashCode {
     }
 
     public static void main(String... args) throws URISyntaxException, IOException {
-
-        URI uri = HashCode.class.getClassLoader().getResource("inputs/sample.in").toURI();
-        Input input = InputReader.read(uri);
-
-        Wireless wireless = input.wireless;
-        Building building = input.building;
-
-        wireless.set(5,6, Cell.R);
-
-        wireless.set(3,15, Cell.R);
-
-
-        HashCode.print(building, wireless);
-
-        wireless.connectRouters(input.backbone.position);
-
-        HashCode.print(building, wireless);
-
-        OutputWriter outputWriter = new OutputWriter();
-        outputWriter.write("result.out");
+        Input input = InputReader.read(HashCode.class.getClassLoader().getResource("inputs/charleston_road.in").toURI());
+        Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange);
     }
 }

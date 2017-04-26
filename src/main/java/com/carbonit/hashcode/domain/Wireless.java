@@ -24,7 +24,7 @@ public class Wireless {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                t[i][j] = Cell.V;
+                t[i][j] = building.at(i, j);
             }
         }
     }
