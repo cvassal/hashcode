@@ -3,25 +3,13 @@ package com.carbonit.hashcode;
 import com.carbonit.hashcode.domain.*;
 import com.carbonit.hashcode.reader.Input;
 import com.carbonit.hashcode.reader.InputReader;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import com.carbonit.hashcode.domain.Wireless;
-import com.carbonit.hashcode.reader.Input;
-import com.carbonit.hashcode.reader.InputReader;
 import com.carbonit.hashcode.writer.OutputWriter;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.stream.Stream;
 
-import static java.util.Collections.emptyList;
-
 public class HashCode {
-
-
 
     public static void print(Building building, Wireless wireless, OutputWriter outputWriter) {
         for (int i = 0; i < wireless.rows; i++) {
