@@ -23,10 +23,10 @@ public class FonctionCalcul {
         return routeurPosition;
     }
 
-    public static Wireless putRouter(Wireless map, int budget, Price price, RouterRange radius) {
+    public static Wireless putRouter(Wireless map, int budget, Price price, RouterRange radius, Position posToConnect) {
         //System.out.println(budget);
         //HashCode.print(map.building, map);
-        if (budget <= price.getRouter() * 9 / 10) {
+        if (budget <= price.getRouter()) {
             return map;
         }
 
@@ -34,10 +34,12 @@ public class FonctionCalcul {
         if (position == null) return map;
         //System.out.println(position);
         Position routerPlacement = findRouterPlacement(map, position, radius);
+        int count = map.connectRouter(routerPlacement, posToConnect);
+        int cost = count * price.getCable();
         //System.out.println(routerPlacement);
         Wireless newMap = map.set(routerPlacement.row, routerPlacement.column, Cell.R);
-        int newBudget = budget - price.getRouter();
+        int newBudget = budget - price.getRouter() - cost;
 
-        return putRouter(newMap, newBudget, price, radius);
+        return putRouter(newMap, newBudget, price, radius, routerPlacement);
     }
 }

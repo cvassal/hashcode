@@ -66,13 +66,13 @@ public class HashCode {
     }
 
     public static void main(String... args) throws URISyntaxException, IOException {
-        final Stream<String> stream = Stream.of("sample", "charleston_road", "opera", "rue_de_londres");
+        final Stream<String> stream = Stream.of("sample");
         stream.forEach(name -> {
             try {
                 OutputWriter outputWriter = new OutputWriter();
                 Input input = InputReader.read(HashCode.class.getClassLoader().getResource("inputs/"+name+".in").toURI());
-                Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange);
-                result.connectRouters(input.backbone.position);
+                Wireless result = FonctionCalcul.putRouter(input.wireless, input.price.getBudget(), input.price, input.routerRange, input.backbone.position);
+                //result.connectRouters(input.backbone.position);
                 HashCode.print(input.building, result, outputWriter);
                 outputWriter.write(name + ".out");
             } catch (IOException | URISyntaxException e) {

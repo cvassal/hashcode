@@ -67,7 +67,7 @@ public class Wireless {
     }
 
 
-    private void connectRouter(Position router, Position backbone) {
+    public int connectRouter(Position router, Position backbone) {
         int x0 = router.column;
         int y0 = router.row;
         int x1 = backbone.column;
@@ -76,6 +76,7 @@ public class Wireless {
         int dy = Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
         int err = (dx>dy ? dx : -dy)/2;
 
+        int count = 0;
             while (true) {
                 if (x0 == x1 && y0 == y1) break;
                 if (!(x0 == router.column && y0 == router.row))
@@ -83,7 +84,9 @@ public class Wireless {
                 int e2 = err;
                 if (e2 > -dx) { err -= dy; x0 += sx; }
                 if (e2 < dy) { err += dx; y0 += sy; }
+                count++;
             }
+            return count;
     }
 
     public void connectRouters(Position backbone) {
