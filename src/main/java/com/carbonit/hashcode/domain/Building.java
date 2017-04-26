@@ -5,28 +5,33 @@ import java.util.Objects;
 
 public class Building {
 
-    public final Position position;
-    public final Cell t[][];
+    public final int rows;
+    public final int columns;
+    private final Cell t[][];
 
+    public Building(int rows, int columns) {
+        this.rows = rows;
+        this.columns = columns;
+        t = new Cell[rows][columns];
 
-    public Building(Position position) {
-        this.position=position;
-        t = new Cell[position.rows][position.columns];
-
-        for (int i = 0; i < position.rows; i++) {
-            for (int j = 0; j < position.columns; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 t[i][j] = Cell.V;
             }
         }
     }
 
-    public Building set(Position position, Cell toAdd) {
-        this.t[position.rows][position.columns] = toAdd;
+    public Building set(int row, int column, Cell toAdd) {
+        this.t[row][column] = toAdd;
         return this;
     }
 
     public Cell at(Position position) {
         return this.t[position.rows][position.columns];
+    }
+
+    public Cell at(int row, int column) {
+        return this.t[row][column];
     }
 
 
@@ -35,25 +40,22 @@ public class Building {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Building building = (Building) o;
-        return position == building.position &&
+        return rows == building.rows &&
+                columns == building.columns &&
                 Arrays.equals(t, building.t);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, t);
+        return Objects.hash(rows, columns, t);
     }
 
     @Override
     public String toString() {
         return "Building{" +
-                "rows=" + position.rows +
-                ", columns=" + position.columns +
+                "rows=" + rows +
+                ", columns=" + columns +
                 ", t=" + Arrays.toString(t) +
                 '}';
-    }
-
-    public Cell getBuilding(Position position) {
-        return t[position.rows][position.columns];
     }
 }

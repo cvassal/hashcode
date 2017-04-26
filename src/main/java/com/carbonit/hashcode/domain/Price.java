@@ -4,18 +4,18 @@ import java.util.Objects;
 
 public class Price {
 
-    private final int backbone;
+    private final int cable;
     private final int router;
     private final int budget;
 
-    public Price(int backbone, int router, int budget) {
-        this.backbone = backbone;
+    public Price(int cable, int router, int budget) {
+        this.cable = cable;
         this.router = router;
         this.budget = budget;
     }
 
-    public int getBackbone() {
-        return backbone;
+    public int getCable() {
+        return cable;
     }
 
     public int getRouter() {
@@ -31,20 +31,20 @@ public class Price {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Price price = (Price) o;
-        return backbone == price.backbone &&
+        return cable == price.cable &&
                 router == price.router &&
                 budget == price.budget;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(backbone, router, budget);
+        return Objects.hash(cable, router, budget);
     }
 
     @Override
     public String toString() {
         return "Price{" +
-                "backbone=" + backbone +
+                "cable=" + cable +
                 ", router=" + router +
                 ", budget=" + budget +
                 '}';

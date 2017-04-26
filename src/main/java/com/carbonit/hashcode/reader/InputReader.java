@@ -39,8 +39,8 @@ public class InputReader {
         });
 
         List<String> rows = Files.lines(path).skip(3).collect(Collectors.toList());
-        for (int i = 0; i < input.backbone.getRow(); i++) {
-            for (int j = 0; j < input.backbone.getColumn(); j++) {
+        for (int i = 0; i < input.building.rows; i++) {
+            for (int j = 0; j < input.building.columns; j++) {
                char c = rows.get(i).charAt(j);
                switch (c) {
                    case '#':

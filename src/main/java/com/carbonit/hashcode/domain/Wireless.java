@@ -7,7 +7,7 @@ public class Wireless {
 
     public final int rows;
     public final int columns;
-    public final Cell t[][];
+    private final Cell t[][];
     public final RouterRange routerRange;
 
     public Wireless(int rows, int columns, RouterRange routerRange) {
