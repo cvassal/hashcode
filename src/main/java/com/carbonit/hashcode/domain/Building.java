@@ -8,4 +8,8 @@ public class Building {
         t = new Cell[w][h];
     }
 
+    public Building at(int row, int column, Cell toAdd) {
+        this.t[row][column] = toAdd;
+        return this;
+    }
 }
