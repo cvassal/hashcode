@@ -5,9 +5,9 @@ public class Wireless {
     public final Cell t[][];
     public final RouterRange routerRange;
 
-    public Wireless(int w, int h, RouterRange routerRange) {
+    public Wireless(int rows, int columns, RouterRange routerRange) {
         this.routerRange = routerRange;
-        t = new Cell[w][h];
+        t = new Cell[rows][columns];
     }
 
     public Wireless at(int row, int column, Cell toAdd) {
