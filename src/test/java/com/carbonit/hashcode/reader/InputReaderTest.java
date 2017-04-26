@@ -1,6 +1,7 @@
 package com.carbonit.hashcode.reader;
 
 import com.carbonit.hashcode.domain.Backbone;
+import com.carbonit.hashcode.domain.Cell;
 import com.carbonit.hashcode.domain.Price;
 import com.carbonit.hashcode.domain.RouterRange;
 import org.assertj.core.api.Assertions;
@@ -26,5 +27,9 @@ public class InputReaderTest {
         assertThat(input.building.columns).isEqualTo(22);
         assertThat(input.wireless.rows).isEqualTo(8);
         assertThat(input.wireless.columns).isEqualTo(22);
+
+        assertThat(input.wireless.at(2, 7)).isEqualTo(Cell.B);
+        assertThat(input.building.at(7, 21)).isEqualTo(Cell.V);
+        assertThat(input.building.at(6, 20)).isEqualTo(Cell.W);
     }
 }

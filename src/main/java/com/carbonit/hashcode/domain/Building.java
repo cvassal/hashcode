@@ -7,7 +7,7 @@ public class Building {
 
     public final int rows;
     public final int columns;
-    public final Cell t[][];
+    private final Cell t[][];
 
     public Building(int rows, int columns) {
         this.rows = rows;
@@ -24,6 +24,10 @@ public class Building {
     public Building set(int row, int column, Cell toAdd) {
         this.t[row][column] = toAdd;
         return this;
+    }
+
+    public Cell at(Position position) {
+        return this.t[position.rows][position.columns];
     }
 
     public Cell at(int row, int column) {

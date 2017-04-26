@@ -10,7 +10,7 @@ public class ScoreService {
 
 	public BigDecimal computeScore(Price price, Integer connectedCells, Integer connectedRouters, Integer connectedTargetedCells) {
 		BigDecimal routers = new BigDecimal(connectedRouters * price.getRouter());
-		BigDecimal cells = new BigDecimal(connectedCells * price.getBackbone());
+		BigDecimal cells = new BigDecimal(connectedCells * price.getCable());
 
 		BigDecimal budgetScoring = new BigDecimal(price.getBudget()).subtract(routers)
 		                                                       .subtract(cells);
