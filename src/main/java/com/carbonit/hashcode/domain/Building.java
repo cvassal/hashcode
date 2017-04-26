@@ -13,12 +13,24 @@ public class Building {
         this.rows = rows;
         this.columns = columns;
         t = new Cell[rows][columns];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                t[i][j] = Cell.V;
+            }
+        }
     }
 
-    public Building at(int row, int column, Cell toAdd) {
+    public Building set(int row, int column, Cell toAdd) {
         this.t[row][column] = toAdd;
         return this;
     }
+
+    public Cell at(int row, int column) {
+        return this.t[row][column];
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

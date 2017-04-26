@@ -15,11 +15,21 @@ public class Wireless {
         t = new Cell[rows][columns];
         this.rows = rows;
         this.columns = columns;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                t[i][j] = Cell.V;
+            }
+        }
     }
 
-    public Wireless at(int row, int column, Cell toAdd) {
+    public Wireless set(int row, int column, Cell toAdd) {
         this.t[row][column] = toAdd;
         return this;
+    }
+
+    public Cell at(int row, int column) {
+        return this.t[row][column];
     }
 
     public void print() {
