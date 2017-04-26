@@ -2,12 +2,12 @@ package com.carbonit.hashcode.domain;
 
 public class Position {
 
-    public final int rows;
-    public final int columns;
+    public final int row;
+    public final int column;
 
     public Position(int row, int column) {
-        this.rows = row;
-        this.columns = column;
+        this.row = row;
+        this.column = column;
     }
 
     @Override
@@ -17,14 +17,14 @@ public class Position {
 
         Position position = (Position) o;
 
-        if (rows != position.rows) return false;
-        return columns == position.columns;
+        if (row != position.row) return false;
+        return column == position.column;
     }
 
     @Override
     public int hashCode() {
-        int result = rows;
-        result = 31 * result + columns;
+        int result = row;
+        result = 31 * result + column;
         return result;
     }
 }
