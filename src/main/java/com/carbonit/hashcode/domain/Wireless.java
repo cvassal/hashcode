@@ -37,6 +37,17 @@ public class Wireless {
         }
     }
 
+    public Position firstTarget() {
+        for(int i = 0; i < this.t.length; i++) {
+            for(int j = 0; j < this.t[0].length; j++) {
+                if(this.t[i][j] == Cell.T) {
+                    return new Position(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
     public Wireless set(int row, int column, Cell toAdd) {
         this.t[row][column] = toAdd;
         if(toAdd == Cell.R) {

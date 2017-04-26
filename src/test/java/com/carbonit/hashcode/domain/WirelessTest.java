@@ -33,4 +33,12 @@ public class WirelessTest {
         assertThat(networking.at(5, 7)).isEqualTo(Cell.V);
         assertThat(networking.at(5, 6)).isEqualTo(Cell.TC);
     }
+
+    @Test
+    public void firstTarget_should_return_the_position_of_the_first_target() {
+        Wireless networking = new Wireless(3, 3, new RouterRange(1), new Building(5, 5));
+        networking.set(1, 1, Cell.T).set(1, 2, Cell.T);
+
+        assertThat(networking.firstTarget()).isEqualTo(new Position(1, 1));
+    }
 }
