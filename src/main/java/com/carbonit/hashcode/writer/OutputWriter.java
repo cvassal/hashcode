@@ -2,6 +2,7 @@ package com.carbonit.hashcode.writer;
 
 import com.carbonit.hashcode.domain.Position;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -46,11 +47,15 @@ public class OutputWriter {
 		                                                .collect(Collectors.toList()));
 
 		try {
-			URI uri = this.getClass()
-			              .getClassLoader()
-			              .getResource("output/" + fileName)
-			              .toURI();
-			Files.write(Paths.get(uri), resultFileAsList, StandardOpenOption.CREATE);
+			String uri = this.getClass()
+			                 .getClassLoader()
+			                 .getResource("output/")
+			                 .toURI()
+			                 .getPath();
+			
+			File file = new File(uri + fileName);
+			file.createNewFile();
+			Files.write(file.toPath(), resultFileAsList, StandardOpenOption.CREATE);
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}

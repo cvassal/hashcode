@@ -54,7 +54,7 @@ public class HashCode {
     }
 
     public static void main(String... args) throws URISyntaxException, IOException {
-        final Stream<String> stream = Stream.of("sample");
+        final Stream<String> stream = Stream.of("charleston_road", "opera", "rue_de_londres", "sample");
         stream.forEach(name -> {
             try {
                 OutputWriter outputWriter = new OutputWriter();
